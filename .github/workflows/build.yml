@@ -375,13 +375,6 @@ jobs:
         echo "=== Disk usage summary ==="
         df -h
         echo ""
-    
-    - name: Enable WireGuard in Config
-      working-directory: ${{ github.workspace }}
-      run: |
-        echo "Suche gki_defconfig und aktiviere WireGuard..."
-        # Wir nutzen 'find', da der Kernel-Ordner je nach Repo etwas anders heißen kann (meist kernel/common/arch/arm64/configs/)
-        find . -name "gki_defconfig" -exec sh -c 'echo "CONFIG_WIREGUARD=y" >> "$1" && echo "WireGuard in $1 aktiviert!"' _ {} \;
 
     - name: Build Kernel
       env:
