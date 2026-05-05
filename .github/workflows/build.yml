@@ -441,6 +441,7 @@ jobs:
         ls -l /home/runner/.ld_cache || true
 
     - name: Save ccache cache
+      continue-on-error: true
       uses: ./.github/actions/save-cache
       with:
         cache_path: /home/runner/.ccache
@@ -450,6 +451,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Save bazel cache
+      continue-on-error: true
       uses: ./.github/actions/save-cache
       with:
         cache_path: /home/runner/.cache/bazel
@@ -459,6 +461,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Save LTO LD cache
+      continue-on-error: true
       uses: ./.github/actions/save-cache
       with:
         cache_path: /home/runner/.ld_cache
