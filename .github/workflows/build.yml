@@ -376,6 +376,13 @@ jobs:
         df -h
         echo ""
 
+    - name: Enable WireGuard via Fragment
+      run: |
+        echo "Aktiviere WireGuard im Fragment..."
+        # Wir hängen die Option einfach an die bereits existierende Fragment-Datei an
+        echo "CONFIG_WIREGUARD=y" >> "$GITHUB_WORKSPACE/wild_gki.fragment"
+        echo "WireGuard erfolgreich zum Fragment hinzugefügt."
+        
     - name: Build Kernel
       env:
         SOURCE_DATE_EPOCH: ${{ env.SOURCE_DATE_EPOCH }}
@@ -452,7 +459,12 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Save LTO LD cache
-      uses: ./.github/actions/save-cache
+      uses: ./.github/actions/save-cache- name: Enable WireGuard via Fragment
+      run: |
+        echo "Aktiviere WireGuard im Fragment..."
+        # Wir hängen die Option einfach an die bereits existierende Fragment-Datei an
+        echo "CONFIG_WIREGUARD=y" >> "$GITHUB_WORKSPACE/wild_gki.fragment"
+        echo "WireGuard erfolgreich zum Fragment hinzugefügt."
       with:
         cache_path: /home/runner/.ld_cache
         cache_key: buildcache-${{ inputs.kernel_version }}
