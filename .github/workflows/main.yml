@@ -352,17 +352,17 @@ jobs:
     - name: Zip AnyKernel3 for Release
       run: |
         set -e
-        # shopt -s nullglob sorgt dafür, dass die Schleife nicht abstürzt, wenn nichts gefunden wird
         shopt -s nullglob
+        
+        ASSETS_DIR="$(pwd)/release-assets"
 
         for dir in release-assets/*AnyKernel3*; do
           if [ -d "$dir" ]; then
             zip_name="$(basename "$dir").zip"
             echo "Erstelle Release-Zip: $zip_name aus Ordner: $dir"
             
-            # In den Ordner gehen, alles zippen und eine Ebene höher speichern
             cd "$dir"
-            zip -r -q -9 "../$zip_name" .
+            zip -r -q -9 "$ASSETS_DIR/$zip_name" .
             cd - >/dev/null
           fi
         done
@@ -378,3 +378,4 @@ jobs:
         files: |
           release-assets/*.zip
           release-assets/*.img
+          *.zip
