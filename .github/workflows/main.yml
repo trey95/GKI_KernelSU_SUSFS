@@ -338,9 +338,9 @@ jobs:
     - name: Download AnyKernel3 Artifacts
       uses: actions/download-artifact@v7
       with:
-        path: release-assets
+        path: release-assets/AnyKernel3-Files
         pattern: '*-AnyKernel3'
-        merge-multiple: false
+        merge-multiple: true
 
     - name: Download Boot Image Artifacts
       uses: actions/download-artifact@v7
@@ -352,20 +352,18 @@ jobs:
     - name: Zip AnyKernel3 for Release
       run: |
         set -e
-        shopt -s nullglob
+        # Wir gehen in den Ordner, in dem alle AnyKernel-Dateien gelandet sind
+        cd release-assets/AnyKernel3-Files
         
-        ASSETS_DIR="$(pwd)/release-assets"
-
-        for dir in release-assets/*AnyKernel3*; do
-          if [ -d "$dir" ]; then
-            zip_name="$(basename "$dir").zip"
-            echo "Erstelle Release-Zip: $zip_name aus Ordner: $dir"
-            
-            cd "$dir"
-            zip -r -q -9 "$ASSETS_DIR/$zip_name" .
-            cd - >/dev/null
-          fi
-        done
+        # Die Zip-Datei soll im Haupt-Assets-Ordner landen
+        zip_name="AnyKernel3-Android15-6.6.zip"
+        
+        echo "Erstelle AnyKernel3 Zip..."
+        zip -r -q -9 "../$zip_name" .
+        
+        cd - >/dev/null
+        # Optional: Den Temp-Ordner löschen
+        rm -rf release-assets/AnyKernel3-Files
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
