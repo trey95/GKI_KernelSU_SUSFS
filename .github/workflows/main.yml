@@ -376,5 +376,5 @@ jobs:
         draft: false
         prerelease: ${{ inputs.release_type == 'Pre-Release' }}
         files: |
-          release-assets/**/*.zip
-          release-assets/**/*-boot*.img
+          release-assets/*.zip
+          release-assets/*.img
