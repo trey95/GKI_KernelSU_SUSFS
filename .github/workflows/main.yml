@@ -347,7 +347,7 @@ jobs:
       with:
         path: release-assets
         pattern: '*-BootImages'
-        merge-multiple: false
+        merge-multiple: true
 
     - name: Zip AnyKernel3 for Release
       run: |
