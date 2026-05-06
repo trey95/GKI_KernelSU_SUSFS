@@ -473,26 +473,12 @@ jobs:
     - name: Create Bootimgs Folder and Build Boot Images
       uses: ./.github/actions/build-boot-images
 
-    - name: Upload Boot Image (boot.img)
+    - name: Upload Boot Image for Release
       uses: actions/upload-artifact@v7
       with:
+        name: ${{ steps.extract.outputs.file_name }}-BootImages
         path: ${{ github.workspace }}/boot-artifacts/${{ steps.extract.outputs.file_name }}-boot.img
         if-no-files-found: error
-        archive: false
-
-    - name: Upload Boot Image (boot-gz.img)
-      uses: actions/upload-artifact@v7
-      with:
-        path: ${{ github.workspace }}/boot-artifacts/${{ steps.extract.outputs.file_name }}-boot-gz.img
-        if-no-files-found: error
-        archive: false
-
-    - name: Upload Boot Image (boot-lz4.img)
-      uses: actions/upload-artifact@v7
-      with:
-        path: ${{ github.workspace }}/boot-artifacts/${{ steps.extract.outputs.file_name }}-boot-lz4.img
-        if-no-files-found: error
-        archive: false
 
     - name: Prepare AnyKernel3 Zip
       uses: ./.github/actions/prepare-anykernel3
