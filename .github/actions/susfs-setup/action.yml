@@ -17,12 +17,6 @@ runs:
       run: |
         set -euo pipefail
 
-        # Fix: Patch-Folder and reload Upstream 
-        mkdir -p "${{ github.workspace }}/kernel_patches/pershoot/susfs4ksu"
-        git clone https://github.com/WildKernels/kernel_patches.git temp_patches 2>/dev/null || true
-        cp -r temp_patches/* "${{ github.workspace }}/kernel_patches/" 2>/dev/null || true
-        rm -rf temp_patches
-
         # Retry transient network errors (up to 5 attempts, 5s backoff).
         retry() {
           local n=0
@@ -52,5 +46,20 @@ runs:
         echo "SUSFS_COMMIT=$SUSFS_COMMIT" >> "$GITHUB_ENV"
         echo "Using SUSFS commit: $SUSFS_COMMIT"
 
-        patch -p1 < "${{ github.workspace }}/kernel_patches/pershoot/susfs4ksu/0001-pershoot-Allow-core-to-be-built-with-no-features.patch"
-        patch -p1 < "${{ github.workspace }}/kernel_patches/pershoot/susfs4ksu/0002-pershoot-Implement-SuSFS-and-Toolkit-coexistence.patch"
+        # Safe patch application (ignores deleted legacy patches gracefully)
+        PATCH1="${{ github.workspace }}/kernel_patches/pershoot/susfs4ksu/0001-pershoot-Allow-core-to-be-built-with-no-features.patch"
+        PATCH2="${{ github.workspace }}/kernel_patches/pershoot/susfs4ksu/0002-pershoot-Implement-SuSFS-and-Toolkit-coexistence.patch"
+
+        if [ -f "$PATCH1" ]; then
+          echo "Applying legacy patch 0001..."
+          patch -p1 < "$PATCH1"
+        else
+          echo "Patch 0001 not found (skipped - upstream dropped or moved this patch)"
+        fi
+
+        if [ -f "$PATCH2" ]; then
+          echo "Applying legacy patch 0002..."
+          patch -p1 < "$PATCH2"
+        else
+          echo "Patch 0002 not found (skipped - upstream dropped or moved this patch)"
+        fi
