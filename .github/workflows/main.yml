@@ -1289,6 +1289,19 @@ jobs:
           cd - >/dev/null
         done
 
+    - name: Verify NoMount metamodule zip
+      if: inputs.use_nomount
+      run: |
+        set -euo pipefail
+        # The metamodule silently missed r20 (artifact built fine, no zip
+        # on the release). Fail loud instead of shipping without it.
+        if ! ls release-assets/NoMount-Metamodule.zip >/dev/null 2>&1; then
+          echo "ERROR: use_nomount is true but release-assets/NoMount-Metamodule.zip is missing" >&2
+          ls release-assets/ >&2
+          exit 1
+        fi
+        echo "NoMount metamodule zip OK"
+
     - name: Create Release
       env:
         GH_TOKEN: ${{ github.token }}
