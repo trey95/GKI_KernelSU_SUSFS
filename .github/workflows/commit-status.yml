@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          submodules: 'recursive'   # <-- DIESE BEIDEN ZEILEN MÜSSEN HIER REIN
+          fetch-depth: 0
 
       - name: Build commit summary
         shell: bash
