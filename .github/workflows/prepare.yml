@@ -86,7 +86,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v7
         with:
-          submodules: 'recursive'   # <-- DIESE BEIDEN ZEILEN MÜSSEN HIER REIN
+          submodules: 'recursive'   
           fetch-depth: 0
         
       - name: Read Config and Build Final Matrix
