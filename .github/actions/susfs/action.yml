@@ -33,14 +33,6 @@ runs:
       with:
         susfs_commit: ${{ inputs.susfs_commit }}
         version: ${{ inputs.version }}
-
-    - name: Download Missing Patches Fix
-      shell: bash
-      run: |
-        mkdir -p "${{ github.workspace }}/kernel_patches/pershoot/susfs4ksu"
-        git clone https://github.com/WildKernels/kernel_patches.git temp_patches 2>/dev/null || true
-        cp -r temp_patches/* "${{ github.workspace }}/kernel_patches/" 2>/dev/null || true
-        rm -rf temp_patches
         
     - name: Enable SUSFS for KernelSU (tiann)
       # tiann/KernelSU main does NOT carry SUSFS, so for the kernelsu flavor we
