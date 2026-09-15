@@ -124,8 +124,8 @@ jobs:
         kernel_version: ${{ inputs.kernel_version }}
         os_patch_level: ${{ inputs.os_patch_level }}
 
-    - name: Revert Upstream Commits
-      uses: ./.github/actions/revert-upstream
+    # - name: Revert Upstream Commits
+    #   uses: ./.github/actions/revert-upstream
 
     - name: Set Build Timestamp from Kernel Commit
       shell: bash
