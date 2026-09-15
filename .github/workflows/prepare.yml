@@ -159,6 +159,7 @@ jobs:
           echo "matrix=$FINAL" >> "$GITHUB_OUTPUT"
 
   build:
+    name: ${{ matrix.kernel_version }} ${{ matrix.android_version }} (${{ inputs.variant }})
     needs: generate-matrix
     strategy:
       fail-fast: false
