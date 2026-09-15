@@ -716,7 +716,6 @@ jobs:
           compression-level: 0
 
   build-android12-5-10:
-    name: 5.10 android12 (${{ matrix.root.variant }})
     needs:
     - resolve-sources
     - build-nomount-module
@@ -746,7 +745,6 @@ jobs:
     secrets: inherit
 
   build-android13-5-10:
-    name: 5.10 android13 (${{ matrix.root.variant }})
     needs:
     - resolve-sources
     - build-nomount-module
@@ -776,7 +774,6 @@ jobs:
     secrets: inherit
 
   build-android13-5-15:
-    name: 5.15 android13 (${{ matrix.root.variant }})
     needs:
     - resolve-sources
     - build-nomount-module
@@ -806,7 +803,6 @@ jobs:
     secrets: inherit
 
   build-android14-5-15:
-    name: 5.15 android14 (${{ matrix.root.variant }})
     needs:
     - resolve-sources
     - build-nomount-module
@@ -836,7 +832,6 @@ jobs:
     secrets: inherit
 
   build-android14-6-1:
-    name: 6.1 android14 (${{ matrix.root.variant }})
     needs:
     - resolve-sources
     - build-nomount-module
@@ -866,7 +861,6 @@ jobs:
     secrets: inherit
 
   build-android15-6-6:
-    name: 6.6 android15 (${{ matrix.root.variant }})
     needs:
     - resolve-sources
     - build-nomount-module
@@ -896,7 +890,6 @@ jobs:
     secrets: inherit
 
   build-android16-6-12:
-    name: 6.12 android16 (${{ matrix.root.variant }})
     needs:
     - resolve-sources
     - build-nomount-module
