@@ -896,7 +896,7 @@ jobs:
       page_size: ${{ inputs.page_size || '4k' }}
     secrets: inherit
 
-  telegram-announce:
+ # telegram-announce:
     # Per-family mini-release digests posted into the Wild Kernels Testing
     # forum topics (one topic per kernel branch). Skipped families (gated
     # off by a single-family dispatch) are dropped; ran families post even
